@@ -36,7 +36,7 @@ authController.post("/signup", async (req, res) => {
     
         await bcrypt.hash(password, 9, async function(err, hash) {
             if(err){
-                return res.status(500).send("Password Error, Please try again...")
+                return res.status(500).send({ message: "Signup Failure", status:500})
             }
             const user = new AuthModel({
                 email,
@@ -53,7 +53,7 @@ authController.post("/signup", async (req, res) => {
                 role
             })
             await user.save();
-             return res.status(200).send({ message: "Signup successfull", user: user})
+             return res.status(200).send({ message: "Signup successfull", status:200})
         });
  
 })
